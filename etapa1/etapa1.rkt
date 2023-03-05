@@ -11,6 +11,8 @@
 ; In caz afirmativ intoarcem lista vida.
 ; Altfel vom adauga in mod recursiv in
 ; lista primul element din fiecare sublista
+; (prin sublista ma refer la restul elementelor
+; ramase in urma apelului recursiv).
 (define (get-men mpref)
   (cond
     ((null? mpref) '())
@@ -24,11 +26,15 @@
 
 ; Similar task-ului anterior doar ca de data aceasta
 ; am folosit recursivitate pe coada.
+
+; Functie ajutatoare pentru evidentierea recursivitatii
+; pe coada.
 (define (get-women-tail l acc)
   (cond
     ((null? l) (reverse acc))
-    (else (append (list (car (car l))) (get-women-tail (cdr l) acc)))))
+    (else (get-women-tail (cdr l) (append (list (car (car l))) acc)))))
 
+; Functia in sine ce o apeleaza pe cea ajutatoare.
 (define (get-women wpref)
   (get-women-tail wpref '()))
 
@@ -100,7 +106,7 @@
 ;rezolvare similara task-ului 3
 (define (get-partner engagements person)
   (cond
-    ((null? engagements) false)
+    ((null? engagements) #f)
     ((equal? (car (car engagements)) person) (cdr (car engagements)))
     (else (get-partner (cdr engagements) person))))
 
