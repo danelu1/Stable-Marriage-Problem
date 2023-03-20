@@ -119,8 +119,8 @@
 ; de perechi cu punct și întoarce o listă simplă cu toate elementele 
 ; care apar în perechi.
 ; Folosiți funcționale, fără recursivitate explicită.
+
+; Doar folosim "foldr" pentru a baga fiecare element din fiecare
+; pereche intr-o lista finala.
 (define (get-couple-members pair-list)
-  (cond ((null? pair-list) '())
-        ((pair? pair-list)
-         (append (my-flatten (car pair-list)) (my-flatten (cdr pair-list))))
-        (else (list pair-list))))
+  (foldr (λ(p acc) (append (list (car p) (cdr p)) acc)) '() pair-list))

@@ -72,10 +72,13 @@
 ; ca lungimea listei formata cu "memebr" aplicat lui "x" e mai mare decat
 ; lungimea listei formata cu "member" aplicat lui "y".
 (define (preferable? pref-list x y)
-  (>
-   (length (member x pref-list))
-   (length (member y pref-list))
-   ))
+  (cond
+    ((equal? (member x pref-list) #f) #f)
+    ((equal? (member y pref-list) #f) #t)
+    (else (>
+           (length (member x pref-list))
+           (length (member y pref-list))))
+    ))
 
 
 ; TODO 5
